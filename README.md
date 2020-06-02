@@ -1,3 +1,5 @@
+![.NET Core](https://github.com/matthewturner/FluentEmail.Handlebars/workflows/.NET%20Core/badge.svg)
+
 ![alt text](https://github.com/lukencode/FluentEmail/raw/master/assets/fluentemail_logo_64x64.png "FluentEmail")
 
 # FluentEmail Handlebars Plugin
