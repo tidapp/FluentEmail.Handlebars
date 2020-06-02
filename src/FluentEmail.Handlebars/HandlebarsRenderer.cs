@@ -46,11 +46,11 @@ namespace FluentEmail.Handlebars
                 return;
             }
 
-            var templates = Directory.GetFiles(_templateRoot, "*.html");
+            var templates = Directory.GetFiles(_templateRoot, "*.html.hbs");
 
             foreach (var template in templates)
             {
-                var name = Path.GetFileNameWithoutExtension(template).ToLower();
+                var name = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(template)).ToLower();
                 var content = File.ReadAllText(template);
                 HandlebarsDotNet.Handlebars.RegisterTemplate(name, content);
             }
