@@ -1,8 +1,6 @@
 name: .NET Core
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -23,13 +21,3 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore
-    - name: Pack
-      run:
-        dotnet pack --configuration Release
-    - name: Publish
-      uses: tanaka-takayoshi/nuget-publish-to-github-packages-action@v2.1
-      with:
-        nupkg-path:  'src/FluentEmail.Handlebars/bin/Release/*.nupkg'
-        repo-owner:  'matthewturner'
-        gh-user:  'matthewturner'
-        token:  ${{ secrets.GITHUB_TOKEN }}
