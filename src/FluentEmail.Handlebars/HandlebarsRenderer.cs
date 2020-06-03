@@ -4,30 +4,28 @@ using System.Threading.Tasks;
 
 using FluentEmail.Core.Interfaces;
 
+using HandlebarsDotNet;
+
 namespace FluentEmail.Handlebars
 {
     public class HandlebarsRenderer : ITemplateRenderer
     {
-        private readonly string _templateRoot;
+        private readonly IHandlebars _engine;
 
         public HandlebarsRenderer()
         {
+            _engine = HandlebarsDotNet.Handlebars.Create();
         }
 
         public HandlebarsRenderer(string templateRoot)
+            : this()
         {
-            if (!Directory.Exists(templateRoot))
-            {
-                throw new ArgumentException($"The templateRoot directory {templateRoot} does not exist");
-            }
-            _templateRoot = templateRoot;
+            RegisterTemplatesFrom(templateRoot);
         }
 
         public async Task<string> ParseAsync<T>(string template, T model, bool isHtml = true)
         {
-            RegisterTemplatesIfRequired();
-
-            var compiledTemplate = HandlebarsDotNet.Handlebars.Compile(template);
+            var compiledTemplate = _engine.Compile(template);
 
             var result = compiledTemplate(model);
 
@@ -39,20 +37,20 @@ namespace FluentEmail.Handlebars
             return ParseAsync(template, model, isHtml).GetAwaiter().GetResult();
         }
 
-        private void RegisterTemplatesIfRequired()
+        private void RegisterTemplatesFrom(string templateRoot)
         {
-            if (string.IsNullOrEmpty(_templateRoot))
+            if (!Directory.Exists(templateRoot))
             {
-                return;
+                throw new ArgumentException($"The templateRoot directory {templateRoot} does not exist");
             }
 
-            var templates = Directory.GetFiles(_templateRoot, "*.html.hbs");
+            var templates = Directory.GetFiles(templateRoot, "*.html.hbs");
 
             foreach (var template in templates)
             {
                 var name = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(template)).ToLower();
                 var content = File.ReadAllText(template);
-                HandlebarsDotNet.Handlebars.RegisterTemplate(name, content);
+                _engine.RegisterTemplate(name, content);
             }
         }
     }
