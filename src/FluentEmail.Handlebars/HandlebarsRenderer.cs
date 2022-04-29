@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FluentEmail.Core.Interfaces;
 
 using HandlebarsDotNet;
+using HandlebarsDotNet.Helpers;
 
 namespace FluentEmail.Handlebars
 {
@@ -15,6 +16,7 @@ namespace FluentEmail.Handlebars
         public HandlebarsRenderer()
         {
             _engine = HandlebarsDotNet.Handlebars.Create();
+            HandlebarsHelpers.Register(_engine);
         }
 
         public HandlebarsRenderer(string templateRoot)
