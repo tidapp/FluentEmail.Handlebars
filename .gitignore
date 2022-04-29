@@ -359,3 +359,5 @@ MigrationBackup/
 .vs/FluentEmail.Handlebars/v16/.suo
 .vs/FluentEmail.Handlebars/v16/TestStore/0/000.testlog
 .vs/FluentEmail.Handlebars/v16/.suo
+
+nuget.config

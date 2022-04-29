@@ -8,8 +8,8 @@
     <PackageId>FluentEmail.Handlebars</PackageId>
     <PackageTags>email;;smtp;fluent;fluentemail;handlebars</PackageTags>
     <PackageIconUrl></PackageIconUrl>
-    <PackageProjectUrl>https://github.com/matthewturner/FluentEmail.Handlebars</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/matthewturner/FluentEmail.Handlebars</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/tidapp/FluentEmail.Handlebars</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tidapp/FluentEmail.Handlebars</RepositoryUrl>
     <TargetFramework>netcoreapp6.0</TargetFramework>
     <Version>0.1.4</Version>
     <AssemblyVersion>0.1.4.0</AssemblyVersion>
@@ -40,5 +40,4 @@
   <Target Name="PostcompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true' ">
     <Exec Command="dotnet pack --no-build --configuration $(Configuration)" />
   </Target>
-
 </Project>
